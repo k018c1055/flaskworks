@@ -5,11 +5,13 @@
     </head>
 
     <body>
-        <h1>{{num}} は
-            {% if num %2 == 9 %}
-            偶数</h1>
-            {% else %}
-            奇数</h1>
-            {% endif %}
-        </body>
+        <h1>70点以上の科目：</h1>
+        <h2>
+            {% for item in list %}
+                {% if list[item] >= 70 %}
+                {{item}}
+                {% endif %}
+            {% endfor %}
+        </h2>
+    </body>
 </html>
