@@ -5,8 +5,11 @@
     </head>
 
     <body>
+        <h1>ユーザー覧<h1>
         <h1>
-            {{message}}
+            {% for item in list %}
+            <li>{{item}}</li>
+            {% endfor %}
         </h1>
     </body>
 </html>

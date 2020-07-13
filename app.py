@@ -2,9 +2,17 @@ from flask import Flask,render_template
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return render_template('index.html', list={"英語": 87, "数学": 90, "国語": 45, "理科": 76, "社会": 31})
+data = []
+
+@app.route('/user/<username>')
+def profile(username):
+    data.append(username)
+    return render_template('adduser.html', adduser=username)
+    
+
+@app.route('/list')
+def profile2():
+    return render_template('userlist.html', list=data)
 
 
 if __name__ == '__main__':
