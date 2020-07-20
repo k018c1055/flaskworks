@@ -1,18 +1,16 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,request
 
 app = Flask(__name__)
 
-data = []
-
-@app.route('/user/<username>')
-def profile(username):
-    data.append(username)
-    return render_template('adduser.html', adduser=username)
+@app.route('/')
+def index():
+    return render_template('index.html')
     
 
-@app.route('/list')
-def profile2():
-    return render_template('userlist.html', list=data)
+@app.route('/send',methods=['POST'])
+def send():
+    msg = request.form.get('msg')
+    return render_template('receive.html', message=msg)
 
 
 if __name__ == '__main__':

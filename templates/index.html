@@ -6,7 +6,10 @@
 
     <body>
         <h1>
-            {{message}}
+            <form method="POST" action="/send" >
+                <input type="text" id="msg" name="msg">
+                <input type="submit" value="送信">
+            </form>
         </h1>
     </body>
 </html>
