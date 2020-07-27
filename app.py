@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import os
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = './static/uploads/'
@@ -14,7 +15,6 @@ def allowed_file(filename):
 def index():
     return render_template('index.html')
 
-
 @app.route('/send', methods=['POST'])
 def send():
     img_file = request.files['img_file']
@@ -24,6 +24,10 @@ def send():
     else:
         return '<p>許可されていない拡張子です</p>'
 
+@app.route('/images')
+def images():
+    files = os.listdir(path=app.config['UPLOAD_FOLDER'])
+    return render_template('images.html',files=files)
 
 if __name__ == '__main__':
     app.debug = True
