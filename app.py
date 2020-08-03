@@ -21,7 +21,6 @@ def index():
     cur.close()
     conn.close()
     return render_template('index.html', books=rows)
-    
 
 @app.route('/send',methods=['POST'])
 def send():
@@ -33,6 +32,20 @@ def send():
     cur = conn.cursor()
     stmt = 'INSERT INTO books(title,price) VALUES(%s,%s)'
     cur.execute(stmt, (title, int(price)))
+    conn.commit()
+    cur.close()
+    conn.close()
+    return redirect('/')
+
+
+@app.route('/delete',methods=['POST'])
+def delete():
+    del_list = request.form.getlist('del_list')
+    conn = db.connect(**db_param)
+    cur = conn.cursor()
+    stmt = 'DELETE FROM books WHERE id=%s'
+    for id in del_list:
+        cur.execute(stmt, (id,))
     conn.commit()
     cur.close()
     conn.close()
